@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>207511225020-go7ac6qg2is872i4jhl1rjfbnob47nhh.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.207511225020-go7ac6qg2is872i4jhl1rjfbnob47nhh</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBi243Gq6HNAziIZ1ix18GbknTQef2Gkt4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>207511225020</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>haiphan.AppChat</string>
+	<key>PROJECT_ID</key>
+	<string>appchatfromletbuild</string>
+	<key>STORAGE_BUCKET</key>
+	<string>appchatfromletbuild.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:207511225020:ios:4fedaf30733d0059</string>
+	<key>DATABASE_URL</key>
+	<string>https://appchatfromletbuild.firebaseio.com</string>
+</dict>
+</plist>
