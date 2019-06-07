@@ -9,6 +9,7 @@
 import Foundation
 
 class User {
+    var id: String!
     var email: String!
     var name: String!
     var pass: String!
@@ -18,11 +19,13 @@ class User {
         self.pass = ""
         self.name = ""
         self.link_image = ""
+        self.id = ""
     }
-    init(email: String, name: String, pass: String, link_image: String) {
+    init(email: String, name: String, pass: String, link_image: String, id: String) {
         self.email = email
         self.pass = pass
         self.name = name
         self.link_image = link_image
+        self.id = id
     }
 }

@@ -29,7 +29,8 @@ class newmessage: UITableViewController {
             let pass = mangtemp["pass"] as! String
             let name = mangtemp["name"] as! String
             let link_image = mangtemp["Avtar_url"] as! String
-            let user : User = User(email: email ?? "hihi", name: name ?? "namedemo", pass: pass ?? "pasdemo", link_image: link_image ?? "linkdemo")
+            let id = snap.key
+            let user : User = User(email: email ?? "hihi", name: name ?? "namedemo", pass: pass ?? "pasdemo", link_image: link_image ?? "linkdemo", id: id)
             self.arrayUser.append(user)
             //crash app
 //            self.tb_newmessage.reloadData()
@@ -72,7 +73,7 @@ class newmessage: UITableViewController {
         cell.detailTextLabel?.text = arrayUser[indexPath.row].email
 //        cell.imageView?.contentMode = .scaleToFill
         
-        cell.profileImageView.load_image(text: arrayUser[indexPath.row].link_image!, positionx: 50, positiony: 50)
+        cell.profileImage.load_image(text: arrayUser[indexPath.row].link_image!, positionx: 25, positiony: 25)
   
         return cell
     }
@@ -81,42 +82,52 @@ class newmessage: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-}
-class UserCell: UITableViewCell {
     
-    let profileImageView: UIImageView = {
-        let imaage = UIImageView()
-        //set image mặc đinh
-//        imaage.image = UIImage(named: "login")
-        imaage.layer.cornerRadius = 50
-        imaage.clipsToBounds = true
-        return imaage
-    }()
-    override func layoutSubviews() {
-        //thêm  super.layoutSubviews()
-        //để xác định view hiển thị của text label
-        super.layoutSubviews()
-        textLabel?.frame = CGRect(x: 116, y: (textLabel?.frame.origin.y)!, width: textLabel!.frame.size.width, height: textLabel!.frame.size.height)
-        detailTextLabel?.frame = CGRect(x: 116, y: (detailTextLabel?.frame.origin.y)! , width: detailTextLabel!.frame.size.width, height: detailTextLabel!.frame.size.height)
-    }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-        //profileimageview sẽ được add vào cell
-        //Nếu viết này thì sẽ được add vào view: addSubview(profileImageView)
-        addSubview(profileImageView)
-        //add contraints for iamge
-        //thêm thuộc tính này mới add contraints có tác dụng
-        profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
-        profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        //Nếu tăng size thì image sẽ bị tràn ra vì Cell không có tự động giãn
-        
-        profileImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        profileImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    //select cell to move chat_log_message
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        self.movescreenbynavi(text: "chat_logmessage")
+        let screen = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chat_logmessage") as! chat_logmessage
+        screen.user = arrayUser[indexPath.row]
+        self.navigationController?.pushViewController(screen, animated: true)
     }
 }
+//class UserCell: UITableViewCell {
+//
+//    let profileImageView: UIImageView = {
+//        let imaage = UIImageView()
+//        //set image mặc đinh
+////        imaage.image = UIImage(named: "login")
+//        imaage.layer.cornerRadius = 50
+//        //set up thuộc tính này thì radius mới hoạt động
+//        imaage.clipsToBounds = true
+//        imaage.layer.borderColor = UIColor.blue.cgColor
+//        return imaage
+//    }()
+//    override func layoutSubviews() {
+//        //thêm  super.layoutSubviews()
+//        //để xác định view hiển thị của text label
+//        super.layoutSubviews()
+//        textLabel?.frame = CGRect(x: 116, y: (textLabel?.frame.origin.y)!, width: textLabel!.frame.size.width, height: textLabel!.frame.size.height)
+//        detailTextLabel?.frame = CGRect(x: 116, y: (detailTextLabel?.frame.origin.y)! , width: detailTextLabel!.frame.size.width, height: detailTextLabel!.frame.size.height)
+//    }
+//
+//    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+//        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+//        //profileimageview sẽ được add vào cell
+//        //Nếu viết này thì sẽ được add vào view: addSubview(profileImageView)
+//        addSubview(profileImageView)
+//        //add contraints for iamge
+//        //thêm thuộc tính này mới add contraints có tác dụng
+//        profileImageView.translatesAutoresizingMaskIntoConstraints = false
+//        profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
+//        profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+//        //Nếu tăng size thì image sẽ bị tràn ra vì Cell không có tự động giãn
+//
+//        profileImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+//        profileImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//}

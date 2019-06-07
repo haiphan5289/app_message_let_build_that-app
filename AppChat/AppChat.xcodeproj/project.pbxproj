@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		16C319951FD476A1E7B47EB2 /* Pods_AppChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12E69190091B04CC0036109D /* Pods_AppChat.framework */; };
 		93F5DBB822A3BDAC00643EFC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F5DBB722A3BDAC00643EFC /* User.swift */; };
+		93F5DBBB22A572B800643EFC /* chat_logmessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F5DBBA22A572B800643EFC /* chat_logmessage.swift */; };
+		93F5DBBF22A6576000643EFC /* Mess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F5DBBE22A6576000643EFC /* Mess.swift */; };
+		93F5DBC122A668FC00643EFC /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F5DBC022A668FC00643EFC /* Cell.swift */; };
+		93F5DBC322A7AEB500643EFC /* cell_collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F5DBC222A7AEB500643EFC /* cell_collection.swift */; };
 		93FF1A3E22A0E0ED00A5F9AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF1A3D22A0E0ED00A5F9AC /* AppDelegate.swift */; };
 		93FF1A4022A0E0ED00A5F9AC /* messagecontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FF1A3F22A0E0ED00A5F9AC /* messagecontroller.swift */; };
 		93FF1A4322A0E0ED00A5F9AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93FF1A4122A0E0ED00A5F9AC /* Main.storyboard */; };
@@ -26,6 +30,10 @@
 		12E69190091B04CC0036109D /* Pods_AppChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		46BACF4D51CC0E4FA0AEA9AC /* Pods-AppChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppChat.debug.xcconfig"; path = "Target Support Files/Pods-AppChat/Pods-AppChat.debug.xcconfig"; sourceTree = "<group>"; };
 		93F5DBB722A3BDAC00643EFC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		93F5DBBA22A572B800643EFC /* chat_logmessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chat_logmessage.swift; sourceTree = "<group>"; };
+		93F5DBBE22A6576000643EFC /* Mess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mess.swift; sourceTree = "<group>"; };
+		93F5DBC022A668FC00643EFC /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		93F5DBC222A7AEB500643EFC /* cell_collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cell_collection.swift; sourceTree = "<group>"; };
 		93FF1A3A22A0E0ED00A5F9AC /* AppChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93FF1A3D22A0E0ED00A5F9AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93FF1A3F22A0E0ED00A5F9AC /* messagecontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messagecontroller.swift; sourceTree = "<group>"; };
@@ -60,6 +68,15 @@
 				12E69190091B04CC0036109D /* Pods_AppChat.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		93F5DBB922A5729500643EFC /* chat_log_message */ = {
+			isa = PBXGroup;
+			children = (
+				93F5DBBA22A572B800643EFC /* chat_logmessage.swift */,
+				93F5DBC222A7AEB500643EFC /* cell_collection.swift */,
+			);
+			path = chat_log_message;
 			sourceTree = "<group>";
 		};
 		93FF1A3122A0E0ED00A5F9AC = {
@@ -100,6 +117,7 @@
 		93FF1A5322A0E3B700A5F9AC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				93F5DBB922A5729500643EFC /* chat_log_message */,
 				93FF1A5E22A2839F00A5F9AC /* newmessage */,
 				93FF1A5D22A2838700A5F9AC /* register_login */,
 			);
@@ -111,6 +129,8 @@
 			children = (
 				93FF1A5722A0E7D900A5F9AC /* viewui.swift */,
 				93F5DBB722A3BDAC00643EFC /* User.swift */,
+				93F5DBC022A668FC00643EFC /* Cell.swift */,
+				93F5DBBE22A6576000643EFC /* Mess.swift */,
 			);
 			path = Design;
 			sourceTree = "<group>";
@@ -260,11 +280,15 @@
 				93FF1A4022A0E0ED00A5F9AC /* messagecontroller.swift in Sources */,
 				93FF1A5C22A1734600A5F9AC /* login.swift in Sources */,
 				93FF1A5222A0E35500A5F9AC /* cell.swift in Sources */,
+				93F5DBBB22A572B800643EFC /* chat_logmessage.swift in Sources */,
 				93FF1A6022A283B500A5F9AC /* newmessage.swift in Sources */,
 				93F5DBB822A3BDAC00643EFC /* User.swift in Sources */,
 				93FF1A3E22A0E0ED00A5F9AC /* AppDelegate.swift in Sources */,
 				93FF1A5522A0E3E000A5F9AC /* register.swift in Sources */,
+				93F5DBC122A668FC00643EFC /* Cell.swift in Sources */,
 				93FF1A5822A0E7D900A5F9AC /* viewui.swift in Sources */,
+				93F5DBBF22A6576000643EFC /* Mess.swift in Sources */,
+				93F5DBC322A7AEB500643EFC /* cell_collection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
