@@ -16,19 +16,22 @@ class Mess {
     var mess: String?
     var image_url: String?
 //    var image_url: String
+    var video_url: String?
     init() {
         self.toID = ""
         self.fromID = ""
         self.timestapm = 0
         self.mess = ""
         self.image_url = ""
+        self.video_url = ""
     }
-    init(toID: String, fromID: String, timestamp: NSNumber, mess: String, image_url: String) {
+    init(toID: String, fromID: String, timestamp: NSNumber, mess: String, image_url: String, video_url: String) {
         self.fromID = fromID
         self.mess = mess
         self.toID = toID
         self.timestapm = timestamp
         self.image_url = image_url
+        self.video_url = video_url
     }
     func get_chat_partner_id() -> String{
         let chat_partner_id: String

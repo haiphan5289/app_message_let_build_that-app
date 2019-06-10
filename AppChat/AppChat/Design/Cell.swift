@@ -77,7 +77,7 @@ class UserCell: UITableViewCell {
         addSubview(timestapm_label)
         
         timestapm_label.translatesAutoresizingMaskIntoConstraints = false
-        timestapm_label.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 8).isActive = true
+        timestapm_label.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8).isActive = true
         timestapm_label.topAnchor.constraint(equalTo: self.topAnchor, constant: 3).isActive = true
         timestapm_label.heightAnchor.constraint(equalTo: detailTextLabel!.heightAnchor, multiplier: 1).isActive = true
         timestapm_label.widthAnchor.constraint(equalToConstant: 120).isActive = true

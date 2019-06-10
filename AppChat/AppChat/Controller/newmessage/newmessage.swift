@@ -30,7 +30,7 @@ class newmessage: UITableViewController {
             let name = mangtemp["name"] as! String
             let link_image = mangtemp["Avtar_url"] as! String
             let id = snap.key
-            let user : User = User(email: email ?? "hihi", name: name ?? "namedemo", pass: pass ?? "pasdemo", link_image: link_image ?? "linkdemo", id: id)
+            let user : User = User(email: email ?? "hihi", name: name ?? "namedemo", pass: pass ?? "pasdemo", link_image: link_image ?? "linkdemo", id: id, link_video: "link_video")
             self.arrayUser.append(user)
             //crash app
 //            self.tb_newmessage.reloadData()

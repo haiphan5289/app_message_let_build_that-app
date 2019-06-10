@@ -36,6 +36,7 @@ extension UIImageView{
         let activities: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
         activities.frame = CGRect(x: positionx , y: positiony, width: 0, height: 0)
         activities.color = .blue
+        activities.hidesWhenStopped = true
         activities.startAnimating()
         self.addSubview(activities)
         let queue = DispatchQueue(label: "queue", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)

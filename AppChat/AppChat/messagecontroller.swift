@@ -23,7 +23,33 @@ class messagecontroller: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "new"), style: .plain, target: self, action: #selector(handlemovetonewmesssage))
         //kiểm tra user có đăng nhập không
         checkuser_inputtitle()
+        //delete table
+        tblist.allowsMultipleSelectionDuringEditing = true
 //        get_message()
+        
+    }
+    //delete table
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    //delete table
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let mess = self.array_mess[indexPath.row]
+        let partner_id = mess.get_chat_partner_id()
+        ref.child("user-mess").child(uid).child(partner_id).removeValue { (err, ref) in
+            if err != nil {
+                print(err?.localizedDescription)
+                return
+            }
+            self.array_mess.remove(at: indexPath.row)
+            self.tblist.deleteRows(at: [indexPath], with: .automatic)
+            
+            
+        }
+            
         
     }
     func get_message_2(){
@@ -32,30 +58,36 @@ class messagecontroller: UIViewController {
         }
         let table_user_mess = ref.child("user-mess").child(uid)
         table_user_mess.observe(.childAdded) { (snap) in
-            let message_id = snap.key
-            let table_mess = ref.child("mess").child(message_id)
-            //value là lấy giái trị trong key luôn
-            table_mess.observeSingleEvent(of: .value, with: { (snap) in
-                let message_data = snap.value as! NSDictionary
-                let fromID = message_data["fromID"] as! String
-                let mess = message_data["mess"] as? String
-                let toID = message_data["toID"] as! String
-                let timestamp = message_data["timestamp"] as! NSNumber
-                let image_url = message_data["image_url"] as? String
-                let message : Mess = Mess(toID: toID, fromID: fromID, timestamp: timestamp, mess: mess ?? "", image_url: image_url ?? "")
-                
-                //group tất cả mess cùng ID lại với nhau
-                var toID_2 = message.get_chat_partner_id()
-                if  toID_2 != nil{
-                    self.message_dictionary[toID_2] = message
-                    self.array_mess = Array(self.message_dictionary.values)
-                    self.array_mess.sort(by: { (mess1, mess2) -> Bool in
-                        return mess1.timestapm.intValue > mess2.timestapm.intValue
-                    })
-                    self.timer.invalidate()
-                    self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handle_call_data), userInfo: nil, repeats: false)
-                }
+            let message_id_partner = snap.key
+            let table_user_mess_partner = ref.child("user-mess").child(uid).child(message_id_partner)
+            table_user_mess_partner.observe(.childAdded, with: { (snap) in
+                let message_id = snap.key
+                let table_mess = ref.child("mess").child(message_id)
+                //value là lấy giái trị trong key luôn
+                table_mess.observeSingleEvent(of: .value, with: { (snap) in
+                    let message_data = snap.value as! NSDictionary
+                    let fromID = message_data["fromID"] as! String
+                    let mess = message_data["mess"] as? String
+                    let toID = message_data["toID"] as! String
+                    let timestamp = message_data["timestamp"] as! NSNumber
+                    let image_url = message_data["image_url"] as? String
+                    let video_url = message_data["video_url"] as? String
+                    let message : Mess = Mess(toID: toID, fromID: fromID, timestamp: timestamp, mess: mess ?? "", image_url: image_url ?? "", video_url: video_url ?? "demo_video")
+                    
+                    //group tất cả mess cùng ID lại với nhau
+                    var toID_2 = message.get_chat_partner_id()
+                    if  toID_2 != nil{
+                        self.message_dictionary[toID_2] = message
+                        self.array_mess = Array(self.message_dictionary.values)
+                        self.array_mess.sort(by: { (mess1, mess2) -> Bool in
+                            return mess1.timestapm.intValue > mess2.timestapm.intValue
+                        })
+                        self.timer.invalidate()
+                        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handle_call_data), userInfo: nil, repeats: false)
+                    }
+                })
             })
+
         }
     }
     //Only call 1 time, user Timer
@@ -76,7 +108,8 @@ class messagecontroller: UIViewController {
                 let toID = message_data["toID"] as! String
                 let timestamp = message_data["timestamp"] as! NSNumber
                 let image_url = message_data["image_url"] as? String
-                let message : Mess = Mess(toID: toID, fromID: fromID, timestamp: timestamp, mess: mess ?? "", image_url: image_url ?? "")
+                let video_url = message_data["video_url"] as? String
+                let message : Mess = Mess(toID: toID, fromID: fromID, timestamp: timestamp, mess: mess ?? "", image_url: image_url ?? "", video_url: video_url ?? "demo_video")
                 //group tất cả các mess cung id lại với nhau
                 //quan trọng
 //                let current_user = Auth.auth().currentUser
@@ -111,7 +144,8 @@ class messagecontroller: UIViewController {
                 let pass = mangtemp?["pass"] as? String
                 let link = mangtemp?["Avtar_url"] as? String
                 let id = snap.key
-                let user: User = User(email: email ?? "emaildemo", name: name ?? "loading....", pass: pass ?? "passdemo", link_image: link ?? "linkdemo", id: id )
+                let link_video = mangtemp?["link_video"] as? String
+                let user: User = User(email: email ?? "emaildemo", name: name ?? "loading....", pass: pass ?? "passdemo", link_image: link ?? "linkdemo", id: id, link_video: link_video ?? "demo_linkvideo")
 //                self.navigationItem.title = user.name
                 self.setupnavigationitem(user: user)
             }
@@ -235,7 +269,8 @@ extension messagecontroller: UITableViewDataSource, UITableViewDelegate {
             let name = mangtemp["name"] as! String
             let pass = mangtemp["pass"] as! String
             let Avtar_url = mangtemp["Avtar_url"] as! String
-            let user: User = User(email: email, name: name, pass: pass, link_image: Avtar_url, id: snap.key)
+            let link_video = mangtemp["link_video"] as? String
+            let user: User = User(email: email, name: name, pass: pass, link_image: Avtar_url, id: snap.key, link_video: link_video ?? "demo_link_video")
             screeen_chat_log.user = user
             
         }, withCancel: nil)
